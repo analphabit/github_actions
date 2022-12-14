@@ -1,6 +1,6 @@
 name: Save to Wayback Machine
 
-on: [push]
+on:
 
   schedule:
     # Replace "cron syntax" with a valid cron syntax

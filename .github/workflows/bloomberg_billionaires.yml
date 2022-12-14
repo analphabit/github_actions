@@ -4,7 +4,7 @@ on:
   schedule:
     # Replace "cron syntax" with a valid cron syntax
     # For example, to run the workflow every day at 12pm UTC, you would use "0 12 * * *"
-    - cron: "16 * * * *"
+    - cron: '16 * * * *'
 
 jobs:
   save_to_wayback_machine:

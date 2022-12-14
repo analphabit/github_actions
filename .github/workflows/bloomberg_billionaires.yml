@@ -1,4 +1,4 @@
-name: Save to Wayback Machine
+name: Save Bloomberg billionaires to Wayback Machine
 
 on:
   schedule:

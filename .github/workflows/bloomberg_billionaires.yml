@@ -2,10 +2,10 @@ name: Save to Wayback Machine
 
 on: [push]
 
-schedule:
-  # Replace "cron syntax" with a valid cron syntax
-  # For example, to run the workflow every day at 12pm UTC, you would use "0 12 * * *"
-  - cron: "0 6,12,18,24 * * *"
+  schedule:
+    # Replace "cron syntax" with a valid cron syntax
+    # For example, to run the workflow every day at 12pm UTC, you would use "0 12 * * *"
+    - cron: "0 6,12,18,24 * * *"
 
 jobs:
   save_to_wayback_machine:

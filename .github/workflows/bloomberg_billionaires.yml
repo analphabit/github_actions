@@ -8,6 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Save to Wayback Machine
-        uses: webrecorder/wayback-machine-action@v1
+        uses: JamieMagee/wayback@v1.3.28
         with:
           url: https://www.bloomberg.com/billionaires/

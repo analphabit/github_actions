@@ -15,9 +15,8 @@ jobs:
           
       - name: Check if directory exists
         run: 
-          if test ! -d excel-files; then
-            mkdir excel-files
-          fi
+          mkdir excel-files
+
       - name: Move Excel file
         run: 
           mv file.xlsx excel-files/file.xlsx

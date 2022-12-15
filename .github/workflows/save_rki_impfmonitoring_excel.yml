@@ -23,6 +23,6 @@ jobs:
           
       - name: Commit Excel file
         run: 
-          git add file.xlsx
+          git add Impfquotenmonitoring.xlsx
           git commit -m "Added Excel file"
           git push

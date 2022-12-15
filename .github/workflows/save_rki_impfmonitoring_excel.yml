@@ -2,27 +2,16 @@ name: Save RKI-Excel file Impfmonitoring
 
 on: [push] 
   #schedule:
-  #  - cron: '20 * * * *' # run the workflow daily at midnight
+  #  - cron: '0 0 * * *'
 
 jobs:
-  download-and-commit:
+  save-excel:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 # check out the code in the repository
-      - name: Download Excel file
-        run: 
-          aria2c https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile
-          
-      - name: Check if directory exists
-        run: 
-          mkdir excel-files
-
-      - name: Move Excel file
-        run: 
-          mv Impfquotenmonitoring.xlsx excel-files/Impfquotenmonitoring.xlsx
-          
-      - name: Commit Excel file
-        run: 
-          git add Impfquotenmonitoring.xlsx
-          git commit -m "Added Excel file"
-          git push
+    - uses: actions/checkout@v2
+    - name: Download Excel File
+      run: |
+        curl -L -o data.xlsx https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile
+    - name: Save Excel File
+      run: |
+        mv data.xlsx $(date +"%Y-%m-%d")-data.xlsx

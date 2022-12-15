@@ -8,10 +8,13 @@ jobs:
   save-excel:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Create Directory
+      run: |
+        mkdir -p data
     - name: Download Excel File
       run: |
-        curl -L -o data.xlsx https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile
+        curl -L -o data/data.xlsx https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile
     - name: Save Excel File
       run: |
-        mv data.xlsx $(date +"%Y-%m-%d")-data.xlsx
+        mv data/data.xlsx data/$(date +"%Y-%m-%d")-data.xlsx

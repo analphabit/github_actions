@@ -1,8 +1,8 @@
 name: Save RKI-Excel file Impfmonitoring
 
-on:
-  schedule:
-    - cron: '20 * * * *' # run the workflow daily at midnight
+on: [push] 
+  #schedule:
+  #  - cron: '20 * * * *' # run the workflow daily at midnight
 
 jobs:
   download-and-commit:

@@ -17,9 +17,7 @@ jobs:
         run: 
           if test ! -d excel-files; then
             mkdir excel-files
-      - name: Download Excel file
-        run: 
-          aria2c https://example.com/path/to/file.xlsx
+          fi
       - name: Move Excel file
         run: 
           mv file.xlsx excel-files/file.xlsx

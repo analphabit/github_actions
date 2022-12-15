@@ -10,23 +10,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3 # check out the code in the repository
       - name: Download Excel file
-        run: |
+        run: 
           aria2c https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile
           
       - name: Check if directory exists
-        run: |
+        run: 
           if test ! -d excel-files; then
             mkdir excel-files
           fi
       - name: Download Excel file
-        run: |
+        run: 
           aria2c https://example.com/path/to/file.xlsx
       - name: Move Excel file
-        run: |
+        run: 
           mv file.xlsx excel-files/file.xlsx
           
       - name: Commit Excel file
-        run: |
+        run: 
           git add file.xlsx
           git commit -m "Added Excel file"
           git push

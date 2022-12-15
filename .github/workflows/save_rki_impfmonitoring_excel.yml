@@ -1,0 +1,19 @@
+name: Save RKI-Excel file Impfmonitoring
+
+on:
+  schedule:
+    - cron: '5 * * * *' # run the workflow daily at midnight
+
+jobs:
+  download-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 # check out the code in the repository
+      - name: Download Excel file
+        run: |
+          wget https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile
+      - name: Commit Excel file
+        run: |
+          git add file.xlsx
+          git commit -m "Added Excel file"
+          git push

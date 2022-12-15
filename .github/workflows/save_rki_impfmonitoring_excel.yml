@@ -14,7 +14,7 @@ jobs:
         mkdir -p data
     - name: Download Excel File
       run: |
-        curl -L -o data/data.xlsx https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile
+        wget https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile -O data/data.xlsx
     - name: Save Excel File
       run: |
         mv data/data.xlsx data/$(date +"%Y-%m-%d")-data.xlsx

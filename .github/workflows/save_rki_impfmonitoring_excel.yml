@@ -19,7 +19,7 @@ jobs:
 
       - name: Move Excel file
         run: 
-          mv file.xlsx excel-files/file.xlsx
+          mv Impfquotenmonitoring.xlsx excel-files/Impfquotenmonitoring.xlsx
           
       - name: Commit Excel file
         run: 

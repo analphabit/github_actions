@@ -1,8 +1,8 @@
 name: Save RKI-Excel file Impfmonitoring
 
-on: [push] 
-  #schedule:
-  #  - cron: '0 0 * * *'
+on: #[push] 
+  schedule:
+    - cron: '0 14 * * 1-6'
 
 jobs:
   save-excel:

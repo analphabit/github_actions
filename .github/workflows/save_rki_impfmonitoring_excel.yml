@@ -24,9 +24,20 @@ jobs:
     #    branch: main
     #    file_pattern: '*.xlsx'
 
+    - name: Configure git user
+      run: |
+        git config --local user.email "analphabit@gmail.com"
+        git config --local user.name "analphabit"
     - name: Add changes to git
       run: |
         git add .
     - name: Commit changes
       run: |
-        git commit -m "Save Excel file for $(date +"%Y-%m-%d")"
+        git diff HEAD --exit-code | Out-Null
+        if ($LASTEXITCODE -ne 0)
+        {
+            git commit -m "Save Excel file for $(date +"%Y-%m-%d")"
+        }
+    - name: Push changes
+      run: |
+        git push

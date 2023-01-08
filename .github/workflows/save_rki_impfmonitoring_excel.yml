@@ -19,8 +19,14 @@ jobs:
       run: |
         mv data/data.xlsx data/$(date +"%Y-%m-%d")-data.xlsx
 
+    #- uses: stefanzweifel/git-auto-commit-action@v4
+    #  with:
+    #    branch: main
+    #    file_pattern: '*.xlsx'
 
-    - uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        branch: main
-        file_pattern: '*.xlsx'
+    - name: Add changes to git
+      run: |
+        git add .
+    - name: Commit changes
+      run: |
+        git commit -m "Save Excel file for $(date +"%Y-%m-%d")"

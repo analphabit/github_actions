@@ -1,4 +1,4 @@
-name: Save pages to Wayback machine
+name: Save multiple pages to Wayback machine
 
 on:
   [push]

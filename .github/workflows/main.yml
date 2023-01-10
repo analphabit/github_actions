@@ -1,0 +1,40 @@
+name: Save pages to Wayback machine
+
+on: [push]
+
+jobs:
+  save-pages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Save pages to Wayback machine
+      env:
+        ACCESS_KEY: ${{ secrets.WAYBACK_MACHINE__ACCESS_KEY }}
+        SECRET_KEY: ${{ secrets.WAYBACK_MACHINE__SECRET_KEY }}
+      run: |
+        # Set the URLs of the web pages you want to save
+        pages = [
+            'https://www.coronavirus.sachsen.de/infektionsfaelle-in-sachsen-4151.html',
+            'https://www.bloomberg.com/billionaires/',
+            'https://www.worldometers.info/coronavirus/'
+        ]
+
+        # Set the base URL of the Wayback Machine API
+        api_base_url = 'https://web.archive.org/save'
+
+        # Set the HTTP headers for the request
+        headers = {
+            'Authorization': f'LOW {ACCESS_KEY}',
+            'X-Amz-Secret-Key': SECRET_KEY
+        }
+
+        # Iterate through the pages and save each one to the Wayback machine
+        for page in pages:
+            # Make a POST request to the /save endpoint to save the page to the Wayback machine
+            response = requests.post(api_base_url, headers=headers, data={'url': page})
+
+            # Check the status code of the response
+            if response.status_code == 200:
+                print(f'Successfully saved {page} to the Wayback machine')
+            else:
+                print(f'Error saving {page} to the Wayback machine')

@@ -24,7 +24,7 @@ jobs:
           SECRET_KEY: ${{ secrets.WAYBACK_MACHINE__SECRET_KEY }}
           
         run: |
-          python - <<EOF ${ACCESS_KEY} ${SECRET_KEY} ${timestamp}
+          python - <<EOF ${ACCESS_KEY} ${SECRET_KEY} "${timestamp}"
           
           import csv
           import requests

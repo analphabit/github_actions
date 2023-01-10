@@ -16,7 +16,7 @@ jobs:
           SECRET_KEY: ${{ secrets.WAYBACK_MACHINE__SECRET_KEY }}
         run: |
         
-          python - <<EOF
+          python - <<EOF ${ACCESS_KEY} ${SECRET_KEY}
           
           import requests
           import sys

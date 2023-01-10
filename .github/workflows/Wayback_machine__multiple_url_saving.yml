@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p saving_logs
           timestamp=$(date +%Y%m%d%H%M%S)
-          touch saving_logs/log_$timestamp.csv
+          touch saving_logs/log_${timestamp}.csv
 
       - name: Save pages to Wayback machine
         env:
@@ -48,7 +48,7 @@ jobs:
           }
           
           # Open a CSV file for writing the log information
-          with open('saving_logs/log_{sys.argv[2]}.csv', 'w', newline='') as csvfile:
+          with open(f'saving_logs/log_{timestamp}.csv', 'w', newline='') as csvfile:
               fieldnames = ['url', 'status']
               writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
               writer.writeheader()

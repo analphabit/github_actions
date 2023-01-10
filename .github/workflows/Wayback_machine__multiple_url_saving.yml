@@ -30,6 +30,8 @@ jobs:
           import requests
           import sys
           
+          timestamp = sys.argv[2]
+          
           # Set the URLs of the web pages you want to save
           url_list = [
               'https://www.coronavirus.sachsen.de/infektionsfaelle-in-sachsen-4151.html',
@@ -71,6 +73,6 @@ jobs:
         run: |
           git config --local user.email "analphabit@gmail.com"
           git config --local user.name "analphabit"
-          git add saving_logs/log_$timestamp.csv
+          git add saving_logs/log_${timestamp}.csv
           git commit -m "Add log file"
           git push

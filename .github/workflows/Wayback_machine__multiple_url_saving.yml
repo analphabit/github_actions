@@ -15,7 +15,8 @@ jobs:
       - name: Create log directory and file
         run: |
           mkdir -p saving_logs
-          touch saving_logs/log.csv
+          timestamp=$(date +%Y%m%d%H%M%S)
+          touch saving_logs/log_$timestamp.csv
 
       - name: Save pages to Wayback machine
         env:
@@ -23,7 +24,7 @@ jobs:
           SECRET_KEY: ${{ secrets.WAYBACK_MACHINE__SECRET_KEY }}
           
         run: |
-          python - <<EOF ${ACCESS_KEY} ${SECRET_KEY}
+          python - <<EOF ${ACCESS_KEY} ${SECRET_KEY} ${timestamp}
           
           import csv
           import requests
@@ -47,7 +48,7 @@ jobs:
           }
           
           # Open a CSV file for writing the log information
-          with open('saving_logs/log.csv', 'w', newline='') as csvfile:
+          with open('saving_logs/log_{sys.argv[2]}.csv', 'w', newline='') as csvfile:
               fieldnames = ['url', 'status']
               writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
               writer.writeheader()
@@ -70,6 +71,6 @@ jobs:
         run: |
           git config --local user.email "analphabit@gmail.com"
           git config --local user.name "analphabit"
-          git add saving_logs/log.csv
+          git add saving_logs/log_$timestamp.csv
           git commit -m "Add log file"
           git push

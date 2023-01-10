@@ -15,6 +15,8 @@ jobs:
           ACCESS_KEY: ${{ secrets.WAYBACK_MACHINE__ACCESS_KEY }}
           SECRET_KEY: ${{ secrets.WAYBACK_MACHINE__SECRET_KEY }}
         run: |
+        
+          python - <<EOF
           # Set the URLs of the web pages you want to save
           url_list = [
               'https://www.coronavirus.sachsen.de/infektionsfaelle-in-sachsen-4151.html',

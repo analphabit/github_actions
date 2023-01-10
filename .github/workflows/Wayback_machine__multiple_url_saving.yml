@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Install requests module
+      run: |
+        pip install requests
     - name: Save pages to Wayback machine
       env:
         ACCESS_KEY: ${{ secrets.WAYBACK_MACHINE__ACCESS_KEY }}

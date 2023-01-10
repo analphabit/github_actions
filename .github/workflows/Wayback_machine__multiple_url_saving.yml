@@ -1,6 +1,8 @@
 name: Save pages to Wayback machine
 
-on: [push]
+on:
+  schedule:
+    - cron: "0 21 * * *"
 
 jobs:
   save-pages:
@@ -17,6 +19,7 @@ jobs:
         run: |
           python - <<EOF ${ACCESS_KEY} ${SECRET_KEY}
           
+          import csv
           import requests
           import sys
           
@@ -24,23 +27,43 @@ jobs:
           url_list = [
               'https://www.coronavirus.sachsen.de/infektionsfaelle-in-sachsen-4151.html',
               'https://www.bloomberg.com/billionaires/',
-              'https://www.worldometers.info/coronavirus/'
+              'https://www.worldometers.info/coronavirus/',
+              'https://lua.rlp.de/de/corona-zahlen/'
           ]
-
+          
           # Set the base URL of the Wayback Machine API
           api_base_url = 'https://web.archive.org/save'
-
+          
           # Set the HTTP headers for the request
           headers = {
               'Authorization': f'LOW {sys.argv[0]}',
               'X-Amz-Secret-Key': sys.argv[1]
           }
-
-          # Iterate through the pages and save each one to the Wayback machine
-          for page in url_list:
-              # Make a POST request to the /save endpoint to save the page to the Wayback machine
-              try:
+          
+          # Open a CSV file for writing the log information
+          with open('saving_logs/log.csv', 'w', newline='') as csvfile:
+              fieldnames = ['url', 'status']
+              writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+              writer.writeheader()
+              
+              # Iterate through the pages and save each one to the Wayback machine
+              for page in url_list:
+                  # Make a POST request to the /save endpoint to save the page to the Wayback machine
                   response = requests.post(api_base_url, headers=headers, data={'url': page})
-              except Exception as e:
-                  print(f'Error saving {page} to the Wayback machine: {e}')
-                  continue
+
+                  # Check the status code of the response
+                  if response.status_code == 200:
+                      print(f'Successfully saved {page} to the Wayback machine')
+                      writer.writerow({'url': page, 'status': 'success'})
+                  else:
+                      print(f'Error saving {page} to the Wayback machine')
+                      writer.writerow({'url': page, 'status': 'error'})
+          EOF
+          
+      - name: Commit log file
+        run: |
+          git config --local user.email "analphabit@gmail.com"
+          git config --local user.name "analphabit"
+          git add saving_logs/log.csv
+          git commit -m "Add log file"
+          git push

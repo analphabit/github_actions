@@ -64,12 +64,12 @@ jobs:
                       writer.writerow({'url': page, 'status': 'error'})
           EOF
                    
-- name: Commit log file and log file with timestamp
-  run: |
-    timestamp=$(date +%Y-%m-%d__%H-%M-%S)
-    git config --local user.email "analphabit@gmail.com"
-    git config --local user.name "analphabit"
-    cp saving_logs/log.csv saving_logs/log_${timestamp}.csv
-    git add saving_logs/log.csv saving_logs/log_${timestamp}.csv
-    git commit -m "Add log files with timestamp ${timestamp}"
-    git push
+      - name: Commit log file and log file with timestamp
+        run: |
+          timestamp=$(date +%Y-%m-%d__%H-%M-%S)
+          git config --local user.email "analphabit@gmail.com"
+          git config --local user.name "analphabit"
+          cp saving_logs/log.csv saving_logs/log_${timestamp}.csv
+          git add saving_logs/log.csv saving_logs/log_${timestamp}.csv
+          git commit -m "Add log files with timestamp ${timestamp}"
+          git push

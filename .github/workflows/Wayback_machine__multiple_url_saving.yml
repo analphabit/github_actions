@@ -15,23 +15,18 @@ jobs:
       - name: Create log directory and file
         run: |
           mkdir -p saving_logs
-          timestamp=$(date +%Y-%m-%d__%M:%H)
-          touch saving_logs/log_${timestamp}.csv
-          echo "timestamp is ${timestamp}"
-
+          touch saving_logs/log.csv
       - name: Save pages to Wayback machine
         env:
           ACCESS_KEY: ${{ secrets.WAYBACK_MACHINE__ACCESS_KEY }}
           SECRET_KEY: ${{ secrets.WAYBACK_MACHINE__SECRET_KEY }}
           
         run: |
-          python - <<EOF ${ACCESS_KEY} ${SECRET_KEY} "${timestamp}"
+          python - <<EOF ${ACCESS_KEY} ${SECRET_KEY}
           
           import csv
           import requests
           import sys
-          
-          timestamp = sys.argv[2]
           
           # Set the URLs of the web pages you want to save
           url_list = [
@@ -51,7 +46,7 @@ jobs:
           }
           
           # Open a CSV file for writing the log information
-          with open(f'saving_logs/log_{timestamp}.csv', 'w', newline='') as csvfile:
+          with open('saving_logs/log.csv', 'w', newline='') as csvfile:
               fieldnames = ['url', 'status']
               writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
               writer.writeheader()
@@ -60,7 +55,6 @@ jobs:
               for page in url_list:
                   # Make a POST request to the /save endpoint to save the page to the Wayback machine
                   response = requests.post(api_base_url, headers=headers, data={'url': page})
-
                   # Check the status code of the response
                   if response.status_code == 200:
                       print(f'Successfully saved {page} to the Wayback machine')
@@ -69,11 +63,15 @@ jobs:
                       print(f'Error saving {page} to the Wayback machine')
                       writer.writerow({'url': page, 'status': 'error'})
           EOF
-          
+                   
       - name: Commit log file
         run: |
+          timestamp=$(date +%Y-%m-%d__%H-%M-%S)
           git config --local user.email "analphabit@gmail.com"
           git config --local user.name "analphabit"
+          git add saving_logs/log.csv
+          git commit -m "Add log file with timestamp ${timestamp}"
+          git mv saving_logs/log.csv saving_logs/log_${timestamp}.csv
           git add saving_logs/log_${timestamp}.csv
-          git commit -m "Add log file"
+          git commit -m "Rename log file with timestamp ${timestamp}"
           git push

@@ -19,6 +19,7 @@ jobs:
           python - <<EOF
           
           import requests
+          import sys
           
           # Set the URLs of the web pages you want to save
           url_list = [
@@ -32,8 +33,8 @@ jobs:
 
           # Set the HTTP headers for the request
           headers = {
-              'Authorization': f'LOW {ACCESS_KEY}',
-              'X-Amz-Secret-Key': SECRET_KEY
+              'Authorization': f'LOW {sys.argv[1]}',
+              'X-Amz-Secret-Key': sys.argv[2]
           }
 
           # Iterate through the pages and save each one to the Wayback machine

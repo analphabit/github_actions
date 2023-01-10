@@ -11,10 +11,17 @@ jobs:
       - name: Install requests module
         run: |
           pip install requests
+          
+      - name: Create log directory and file
+        run: |
+          mkdir -p saving_logs
+          touch saving_logs/log.csv
+
       - name: Save pages to Wayback machine
         env:
           ACCESS_KEY: ${{ secrets.WAYBACK_MACHINE__ACCESS_KEY }}
           SECRET_KEY: ${{ secrets.WAYBACK_MACHINE__SECRET_KEY }}
+          
         run: |
           python - <<EOF ${ACCESS_KEY} ${SECRET_KEY}
           

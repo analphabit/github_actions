@@ -15,7 +15,7 @@ jobs:
       - name: Create log directory and file
         run: |
           mkdir -p saving_logs
-          timestamp=$(date +%Y%m%d%H%M%S)
+          timestamp=$(date +%Y-%m-%d__%M:%H)
           touch saving_logs/log_${timestamp}.csv
           echo "timestamp is ${timestamp}"
 
@@ -74,6 +74,6 @@ jobs:
         run: |
           git config --local user.email "analphabit@gmail.com"
           git config --local user.name "analphabit"
-          git add "saving_logs/log_${timestamp}.csv"
+          git add saving_logs/log_${timestamp}.csv
           git commit -m "Add log file"
           git push

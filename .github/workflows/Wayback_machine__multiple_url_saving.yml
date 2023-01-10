@@ -1,8 +1,10 @@
 name: Save pages to Wayback machine
 
 on:
+  push:
+    branches: [ master ]
   schedule:
-    - cron: "0 21 * * *"
+    - cron: "0 22 * * *"
 
 jobs:
   save-pages:

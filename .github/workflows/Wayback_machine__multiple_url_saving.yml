@@ -17,6 +17,7 @@ jobs:
           mkdir -p saving_logs
           timestamp=$(date +%Y%m%d%H%M%S)
           touch saving_logs/log_${timestamp}.csv
+          echo "timestamp is ${timestamp}"
 
       - name: Save pages to Wayback machine
         env:

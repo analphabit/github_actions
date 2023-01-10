@@ -73,6 +73,6 @@ jobs:
         run: |
           git config --local user.email "analphabit@gmail.com"
           git config --local user.name "analphabit"
-          git add saving_logs/log_${timestamp}.csv
+          git add saving_logs/log_"${timestamp}".csv
           git commit -m "Add log file"
           git push

@@ -31,6 +31,7 @@ jobs:
           import csv
           import requests
           import sys
+          import time
           
           # Set the URLs of the web pages you want to save
           url_list = [
@@ -67,6 +68,8 @@ jobs:
                   else:
                       print(f'Error saving {page} to the Wayback machine')
                       writer.writerow({'url': page, 'status': 'error'})
+                  # Add a delay of 20 seconds before the next iteration
+                  time.sleep(20)
           EOF
                    
       - name: Commit log file and log file with timestamp

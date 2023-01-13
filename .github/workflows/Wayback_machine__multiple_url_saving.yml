@@ -60,7 +60,7 @@ jobs:
               # Iterate through the pages and save each one to the Wayback machine
               for page in url_list:
                   # Make a POST request to the /save endpoint to save the page to the Wayback machine
-                  response = requests.post(api_base_url, headers=headers, data={'url': page})
+                  response = requests.post(api_base_url, headers=headers, data={'url': page}, timeout=(600, 1200))
                   # Check the status code of the response
                   if response.status_code == 200:
                       print(f'Successfully saved {page} to the Wayback machine')

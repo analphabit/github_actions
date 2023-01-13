@@ -41,21 +41,7 @@ jobs:
               'https://www.bundesregierung.de/breg-de/themen/krieg-in-der-ukraine/lieferungen-ukraine-2054514',
               'https://www.rki.de/DE/Content/Infekt/Sentinel/Grippeweb/Wochenberichte/Wochenbericht_aktuell.html',
               'https://lua.rlp.de/de/corona-zahlen/',
-              'https://www.bergfex.de/deutschland/schneewerte/',
-              'https://www.bergfex.at/oesterreich/schneewerte/',
-              'https://www.bergfex.ch/schweiz/schneewerte/',
-              'https://www.bergfex.it/italien/schneewerte/',
-              'https://www.bergfex.at/slovenia/schneewerte/',
-              'https://www.bergfex.at/frankreich/schneewerte/',
-              'https://www.bergfex.at/nederland/schneewerte/',              
-              'https://www.bergfex.at/belgie/schneewerte/',
-              'https://www.bergfex.at/polska/schneewerte/',
-              'https://www.bergfex.at/czechia/schneewerte/',
-              'https://www.bergfex.at/slovakia/schneewerte/',
-              'https://www.bergfex.at/spanien/schneewerte/',              
-              'https://www.bergfex.at/kroatien/schneewerte/',
-              'https://www.bergfex.at/bosnien-herzegowina/schneewerte/',
-              'https://www.bergfex.at/liechtenstein/schneewerte/'
+              'https://www.bergfex.de/deutschland/schneewerte/'
           ]
           
           # Set the base URL of the Wayback Machine API

@@ -67,7 +67,7 @@ jobs:
                       writer.writerow({'url': page, 'status': 'success'})
                   else:
                       print(f'Error saving {page} to the Wayback machine')
-                      writer.writerow({'url': page, 'status': 'error'})
+                      writer.writerow({'url': page, 'status': 'error'}, 'error_code': response.status_code})
                   # Add a delay of 20 seconds before the next iteration
                   time.sleep(20)
           EOF

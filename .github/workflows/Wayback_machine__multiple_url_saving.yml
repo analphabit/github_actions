@@ -37,7 +37,6 @@ jobs:
               'https://www.coronavirus.sachsen.de/infektionsfaelle-in-sachsen-4151.html',
               'https://www.bloomberg.com/billionaires/',
               'https://www.worldometers.info/coronavirus/',
-              'https://lua.rlp.de/de/corona-zahlen/',
               'https://www.bundesregierung.de/breg-de/themen/krieg-in-der-ukraine/lieferungen-ukraine-2054514',
               'https://www.rki.de/DE/Content/Infekt/Sentinel/Grippeweb/Wochenberichte/Wochenbericht_aktuell.html'
           ]

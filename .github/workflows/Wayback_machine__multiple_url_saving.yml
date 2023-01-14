@@ -1,11 +1,11 @@
 name: Save multiple pages to Wayback machine
 
-on: [push]
+on: 
   
-  #schedule:
+  schedule:
     # Replace "cron syntax" with a valid cron syntax
     # For example, to run the workflow every day at 12pm UTC, you would use "0 12 * * *"
-    #- cron: '45 9,22 * * *'
+    - cron: '45 9,22 * * *'
 
 jobs:
   save-pages:
@@ -39,7 +39,9 @@ jobs:
               'https://www.bloomberg.com/billionaires/',
               'https://www.worldometers.info/coronavirus/',
               'https://www.bundesregierung.de/breg-de/themen/krieg-in-der-ukraine/lieferungen-ukraine-2054514',
-              'https://www.rki.de/DE/Content/Infekt/Sentinel/Grippeweb/Wochenberichte/Wochenbericht_aktuell.html'
+              'https://www.rki.de/DE/Content/Infekt/Sentinel/Grippeweb/Wochenberichte/Wochenbericht_aktuell.html',
+              'https://lua.rlp.de/de/corona-zahlen/',
+              'https://www.bergfex.de/deutschland/schneewerte/'
           ]
           
           # Set the base URL of the Wayback Machine API
@@ -68,8 +70,8 @@ jobs:
                   else:
                       print(f'Error saving {page} to the Wayback machine')
                       writer.writerow({'url': page, 'status': 'error'})
-                  # Add a delay of 45 seconds before the next iteration
-                  time.sleep(45)
+                  # Add a delay of 25 seconds before the next iteration
+                  time.sleep(25)
           EOF
                    
       - name: Commit log file and log file with timestamp
